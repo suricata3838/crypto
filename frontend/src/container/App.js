@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
@@ -8,6 +9,9 @@ import CoinValue from './CoinValue';
 import SimulationResult from './SimulationResult';
 import Trades from './Trades';
 import Simulation from '../store/Simulation';
+
+import applePay from '../store/applePay';
+console.log('applePay:', applePay.length);
 
 const Main = styled.main`
   display: grid;
@@ -25,7 +29,7 @@ const Main = styled.main`
 `;
 
 @observer
-class App extends Component {
+class Home extends Component {
   componentWillMount() {
     this.simulation = new Simulation();
   }
@@ -39,6 +43,25 @@ class App extends Component {
         <Trades simulation={this.simulation} />
         <CoinValue simulation={this.simulation} />
       </Main>
+    );
+  }
+}
+
+class App extends Component {
+  render() {
+    return (
+      <React.StrictMode>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route
+              exact
+              path="/.well-known/apple-developer-merchantid-domain-association"
+              render={() => <div>{applePay}</div>}
+            />
+          </Switch>
+        </Router>
+      </React.StrictMode>
     );
   }
 }
