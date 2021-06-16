@@ -13,6 +13,8 @@ import Simulation from '../store/Simulation';
 import applePay from '../store/applePay';
 console.log('applePay:', applePay.length);
 
+const reload = () => window.location.reload();
+
 const Main = styled.main`
   display: grid;
   padding: 1rem 1rem;
@@ -56,8 +58,13 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route
               exact
+              path="/apple-developer-merchantid-domain-association.txt"
+              onEnter={reload}
+            />
+            <Route
+              exact
               path="/.well-known/apple-developer-merchantid-domain-association"
-              render={() => <div>{applePay}</div>}
+              onEnter={reload}
             />
           </Switch>
         </Router>
