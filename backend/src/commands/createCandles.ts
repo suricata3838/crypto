@@ -5,11 +5,18 @@ import Candle from '../models/candle';
 
 async function generateCandles() {
   const connection = await createConnection();
-  const ticks = await connection.getRepository(Tick).find({
+  console.log("conection created");
+
+  const tickRepo = connection.getRepository(Tick);
+  console.log("got repo");
+  
+  const ticks = await tickRepo.find({
     order: {
-      timestamp: 'ASC',
+      timestamp: 'ASC'
     },
+    take: 10000
   });
+  console.log("got 10000 ticks");
 
   const result = {};
   each(ticks, (tick: Tick) => {

@@ -33,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <Main>
-        <Header>Crypto</Header>
+        <Header>Seira Crypto</Header>
         <SimulationForm simulation={this.simulation} />
         <SimulationResult simulation={this.simulation} />
         <Trades simulation={this.simulation} />
